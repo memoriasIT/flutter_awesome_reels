@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 import 'package:like_button/like_button.dart';
 
 import '../controllers/reel_controller.dart';
@@ -33,8 +32,7 @@ class ReelActions extends StatefulWidget {
   State<ReelActions> createState() => _ReelActionsState();
 }
 
-class _ReelActionsState extends State<ReelActions>
-    with TickerProviderStateMixin {
+class _ReelActionsState extends State<ReelActions> with TickerProviderStateMixin {
   late AnimationController _pulseAnimationController;
   late Animation<double> _pulseAnimation;
   bool _isDisposed = false;
@@ -82,7 +80,7 @@ class _ReelActionsState extends State<ReelActions>
           likeCountAnimationType: LikeCountAnimationType.none,
           likeBuilder: (bool isLiked) {
             return Icon(
-              IconlyLight.heart,
+              Icons.favorite_outline,
               color: isLiked ? Colors.red : widget.config.textColor,
               size: 32,
             );
@@ -106,7 +104,7 @@ class _ReelActionsState extends State<ReelActions>
         const SizedBox(height: 16),
         // Comment button
         _buildActionButton(
-          icon: IconlyLight.chat,
+          icon: Icons.comment_outlined,
           iconColor: widget.config.textColor,
           count: widget.reel.commentsCount,
           onTap: () => _handleComment(controller),
@@ -114,38 +112,28 @@ class _ReelActionsState extends State<ReelActions>
         const SizedBox(height: 16),
         // Share button
         _buildActionButton(
-          icon: IconlyLight.send,
+          icon: Icons.share_outlined,
           iconColor: widget.config.textColor,
           count: widget.reel.sharesCount,
           onTap: () => _handleShare(controller),
         ),
         const SizedBox(height: 16),
         // Bookmark button (only show if not in more menu)
-        if (widget.config.showBookmarkButton &&
-            !widget.config.bookmarkInMoreMenu)
+        if (widget.config.showBookmarkButton && !widget.config.bookmarkInMoreMenu)
           _buildActionButton(
-            icon: widget.reel.isBookmarked
-                ? Icons.bookmark
-                : Icons.bookmark_border,
-            iconColor: widget.reel.isBookmarked
-                ? widget.config.accentColor
-                : widget.config.textColor,
+            icon: widget.reel.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+            iconColor: widget.reel.isBookmarked ? widget.config.accentColor : widget.config.textColor,
             onTap: () => _handleBookmark(controller),
           ),
-        if (widget.config.showBookmarkButton &&
-            !widget.config.bookmarkInMoreMenu)
-          const SizedBox(height: 16),
+        if (widget.config.showBookmarkButton && !widget.config.bookmarkInMoreMenu) const SizedBox(height: 16),
         // Download button (only show if not in more menu)
-        if (widget.config.showDownloadButton &&
-            !widget.config.downloadInMoreMenu)
+        if (widget.config.showDownloadButton && !widget.config.downloadInMoreMenu)
           _buildActionButton(
             icon: Icons.download,
             iconColor: widget.config.textColor,
             onTap: () => _handleDownload(controller),
           ),
-        if (widget.config.showDownloadButton &&
-            !widget.config.downloadInMoreMenu)
-          const SizedBox(height: 16),
+        if (widget.config.showDownloadButton && !widget.config.downloadInMoreMenu) const SizedBox(height: 16),
         // More options button
         if (widget.config.showMoreButton)
           _buildActionButton(
@@ -275,9 +263,7 @@ class _ReelActionsState extends State<ReelActions>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          widget.reel.isBookmarked
-              ? 'Removed from bookmarks'
-              : 'Added to bookmarks',
+          widget.reel.isBookmarked ? 'Removed from bookmarks' : 'Added to bookmarks',
         ),
         duration: const Duration(seconds: 1),
         backgroundColor: widget.config.accentColor,
@@ -331,7 +317,7 @@ class _ReelActionsState extends State<ReelActions>
               child: Transform.scale(
                 scale: 0.5 + (0.5 * animation.value),
                 child: Icon(
-                  IconlyLight.heart,
+                  Icons.favorite_outline,
                   color: Colors.red,
                   size: 30,
                 ),
@@ -350,8 +336,7 @@ class _ReelActionsState extends State<ReelActions>
     });
   }
 
-  void _showCommentsBottomSheet(
-      BuildContext context, ReelController controller) {
+  void _showCommentsBottomSheet(BuildContext context, ReelController controller) {
     final TextEditingController commentController = TextEditingController();
     final FocusNode commentFocusNode = FocusNode();
 
@@ -389,8 +374,7 @@ class _ReelActionsState extends State<ReelActions>
                   ),
                   // Header
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Row(
                       children: [
                         Text(
@@ -400,10 +384,9 @@ class _ReelActionsState extends State<ReelActions>
                         const Spacer(),
                         Text(
                           ReelUtils.formatCount(widget.reel.commentsCount),
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Colors.grey[600],
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: Colors.grey[600],
+                              ),
                         ),
                       ],
                     ),
@@ -604,23 +587,17 @@ class _ReelActionsState extends State<ReelActions>
           mainAxisSize: MainAxisSize.min,
           children: [
             // Bookmark in more menu
-            if (widget.config.showBookmarkButton &&
-                widget.config.bookmarkInMoreMenu)
+            if (widget.config.showBookmarkButton && widget.config.bookmarkInMoreMenu)
               ListTile(
-                leading: Icon(widget.reel.isBookmarked
-                    ? Icons.bookmark
-                    : Icons.bookmark_border),
-                title: Text(widget.reel.isBookmarked
-                    ? 'Remove bookmark'
-                    : 'Add bookmark'),
+                leading: Icon(widget.reel.isBookmarked ? Icons.bookmark : Icons.bookmark_border),
+                title: Text(widget.reel.isBookmarked ? 'Remove bookmark' : 'Add bookmark'),
                 onTap: () {
                   Navigator.pop(context);
                   _handleBookmark(controller);
                 },
               ),
             // Download in more menu
-            if (widget.config.showDownloadButton &&
-                widget.config.downloadInMoreMenu)
+            if (widget.config.showDownloadButton && widget.config.downloadInMoreMenu)
               ListTile(
                 leading: Icon(Icons.download),
                 title: Text('Download'),

@@ -117,39 +117,40 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Obx(() => SwitchListTile(
-                  title: const Text('Auto Play',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Automatically play videos when visible',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableAutoPlay.value,
-                  onChanged: (value) => _enableAutoPlay.value = value,
-                  activeColor: Colors.white,
-                )),
-            Obx(() => SwitchListTile(
-                  title: const Text('Mute by Default',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Start videos muted',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableMute.value,
-                  onChanged: (value) => _enableMute.value = value,
-                  activeColor: Colors.white,
-                )),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Auto Play', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Automatically play videos when visible', style: TextStyle(color: Colors.white70)),
+                value: _enableAutoPlay.value,
+                onChanged: (value) => _enableAutoPlay.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Mute by Default', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Start videos muted', style: TextStyle(color: Colors.white70)),
+                value: _enableMute.value,
+                onChanged: (value) => _enableMute.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
             const Divider(color: Colors.white30),
-            Obx(() => ListTile(
-                  title: const Text('Volume',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: Slider(
-                    value: _volume.value,
-                    onChanged: (value) => _volume.value = value,
-                    min: 0.0,
-                    max: 1.0,
-                    divisions: 10,
-                    label: '${(_volume.value * 100).round()}%',
-                    activeColor: Colors.white,
-                    inactiveColor: Colors.white30,
-                  ),
-                )),
+            Obx(
+              () => ListTile(
+                title: const Text('Volume', style: TextStyle(color: Colors.white)),
+                subtitle: Slider(
+                  value: _volume.value,
+                  onChanged: (value) => _volume.value = value,
+                  min: 0.0,
+                  max: 1.0,
+                  divisions: 10,
+                  label: '${(_volume.value * 100).round()}%',
+                  activeColor: Colors.white,
+                  inactiveColor: Colors.white30,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -163,33 +164,33 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Obx(() => SwitchListTile(
-                  title: const Text('Long Press Controls',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Long press to pause, release to play',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableLongPressControls.value,
-                  onChanged: (value) => _enableLongPressControls.value = value,
-                  activeColor: Colors.white,
-                )),
-            Obx(() => SwitchListTile(
-                  title: const Text('Double Tap Like',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Double tap to like with animation',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableDoubleTapLike.value,
-                  onChanged: (value) => _enableDoubleTapLike.value = value,
-                  activeColor: Colors.white,
-                )),
-            Obx(() => SwitchListTile(
-                  title: const Text('Gesture Controls',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Enable swipe and tap gestures',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableGestures.value,
-                  onChanged: (value) => _enableGestures.value = value,
-                  activeColor: Colors.white,
-                )),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Long Press Controls', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Long press to pause, release to play', style: TextStyle(color: Colors.white70)),
+                value: _enableLongPressControls.value,
+                onChanged: (value) => _enableLongPressControls.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Double Tap Like', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Double tap to like with animation', style: TextStyle(color: Colors.white70)),
+                value: _enableDoubleTapLike.value,
+                onChanged: (value) => _enableDoubleTapLike.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Gesture Controls', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Enable swipe and tap gestures', style: TextStyle(color: Colors.white70)),
+                value: _enableGestures.value,
+                onChanged: (value) => _enableGestures.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
           ],
         ),
       ),
@@ -203,21 +204,19 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Obx(() => SwitchListTile(
-                  title: const Text('Enable Caching',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Cache videos for better performance',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _enableCaching.value,
-                  onChanged: (value) => _enableCaching.value = value,
-                  activeColor: Colors.white,
-                )),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Enable Caching', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Cache videos for better performance', style: TextStyle(color: Colors.white70)),
+                value: _enableCaching.value,
+                onChanged: (value) => _enableCaching.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
             const Divider(color: Colors.white30),
             Obx(() => ListTile(
-                  title: const Text('Preload Range',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: Text(
-                      'Preload ${_preloadRange.value} videos ahead/behind',
+                  title: const Text('Preload Range', style: TextStyle(color: Colors.white)),
+                  subtitle: Text('Preload ${_preloadRange.value} videos ahead/behind',
                       style: const TextStyle(color: Colors.white70)),
                   trailing: SizedBox(
                     width: 100,
@@ -245,22 +244,19 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Obx(() => SwitchListTile(
-                  title: const Text('Show Progress Bar',
-                      style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Display video progress at bottom',
-                      style: TextStyle(color: Colors.white70)),
-                  value: _showProgressBar.value,
-                  onChanged: (value) => _showProgressBar.value = value,
-                  activeColor: Colors.white,
-                )),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Show Progress Bar', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Display video progress at bottom', style: TextStyle(color: Colors.white70)),
+                value: _showProgressBar.value,
+                onChanged: (value) => _showProgressBar.value = value,
+                activeThumbColor: Colors.white,
+              ),
+            ),
             const ListTile(
-              title: Text('Play/Pause Icon',
-                  style: TextStyle(color: Colors.white)),
-              subtitle: Text('Always centered when shown',
-                  style: TextStyle(color: Colors.white70)),
-              trailing:
-                  Icon(Icons.play_circle_filled, color: Colors.white, size: 30),
+              title: Text('Play/Pause Icon', style: TextStyle(color: Colors.white)),
+              subtitle: Text('Always centered when shown', style: TextStyle(color: Colors.white70)),
+              trailing: Icon(Icons.play_circle_filled, color: Colors.white, size: 30),
             ),
           ],
         ),
@@ -281,7 +277,6 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-
             Container(
               height: 700,
               decoration: BoxDecoration(

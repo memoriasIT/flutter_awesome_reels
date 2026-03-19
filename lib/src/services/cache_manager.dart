@@ -68,8 +68,7 @@ class CacheManager {
     }
 
     // Start download
-    final downloadFuture =
-        _performDownload(url, onProgress: onProgress, cancelToken: cancelToken);
+    final downloadFuture = _performDownload(url, onProgress: onProgress, cancelToken: cancelToken);
     _downloadFutures[url] = downloadFuture;
 
     try {
@@ -229,11 +228,9 @@ class CacheManager {
     try {
       final file = File('${_cacheDirectory.path}/cache_index.json');
       if (await file.exists()) {
-        final json =
-            jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+        final json = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
         _cacheIndex.clear();
-        _cacheIndex.addAll(json.map((key, value) =>
-            MapEntry(key, CacheItem.fromJson(value as Map<String, dynamic>))));
+        _cacheIndex.addAll(json.map((key, value) => MapEntry(key, CacheItem.fromJson(value as Map<String, dynamic>))));
       }
     } catch (e) {
       debugPrint('Error loading cache index: $e');
@@ -245,8 +242,7 @@ class CacheManager {
   Future<void> _saveCacheIndex() async {
     try {
       final file = File('${_cacheDirectory.path}/cache_index.json');
-      final json =
-          _cacheIndex.map((key, value) => MapEntry(key, value.toJson()));
+      final json = _cacheIndex.map((key, value) => MapEntry(key, value.toJson()));
       await file.writeAsString(jsonEncode(json));
     } catch (e) {
       debugPrint('Error saving cache index: $e');
@@ -292,8 +288,7 @@ class CacheManager {
     if (stats.totalSize <= _config.maxCacheSize) return;
 
     // Sort by last access time (LRU)
-    final sortedItems = _cacheIndex.values.toList()
-      ..sort((a, b) => a.lastAccessTime.compareTo(b.lastAccessTime));
+    final sortedItems = _cacheIndex.values.toList()..sort((a, b) => a.lastAccessTime.compareTo(b.lastAccessTime));
 
     int currentSize = stats.totalSize;
     final itemsToRemove = <CacheItem>[];
@@ -320,8 +315,7 @@ class CacheManager {
 
     if (itemsToRemove.isNotEmpty) {
       await _saveCacheIndex();
-      debugPrint(
-          'Removed ${itemsToRemove.length} cache items to enforce size limit');
+      debugPrint('Removed ${itemsToRemove.length} cache items to enforce size limit');
     }
   }
 
@@ -344,16 +338,13 @@ class CacheManager {
 
     // Use cache file if available
     final filePath = getCachedFilePath(url);
-    final controller = filePath != null
-        ? _createControllerFromFile(filePath)
-        : _createControllerFromUrl(url);
+    final controller = filePath != null ? _createControllerFromFile(filePath) : _createControllerFromUrl(url);
 
     // Initialize the controller immediately
     controller.initialize().then((_) {
       debugPrint('Video controller initialized for reel: $reelId');
     }).catchError((error) {
-      debugPrint(
-          'Error initializing video controller for reel $reelId: $error');
+      debugPrint('Error initializing video controller for reel $reelId: $error');
       _videoControllers.remove(reelId);
       _controllerAccessTimes.remove(reelId);
     });
@@ -367,9 +358,7 @@ class CacheManager {
   void _evictOldestController() {
     if (_videoControllers.isEmpty) return;
 
-    final oldest = _controllerAccessTimes.entries
-        .reduce((a, b) => a.value.isBefore(b.value) ? a : b)
-        .key;
+    final oldest = _controllerAccessTimes.entries.reduce((a, b) => a.value.isBefore(b.value) ? a : b).key;
 
     _videoControllers[oldest]?.dispose();
     _videoControllers.remove(oldest);
@@ -385,12 +374,10 @@ class CacheManager {
 
   /// Evict least recently used files if over max cache size (parallel file checks)
   Future<void> _evictIfOverCacheSize() async {
-    int totalSize =
-        _cacheIndex.values.fold(0, (sum, item) => sum + item.fileSize);
+    int totalSize = _cacheIndex.values.fold(0, (sum, item) => sum + item.fileSize);
     if (totalSize <= _maxCacheFileSize) return;
     // Sort by last access time (oldest first)
-    final sorted = _cacheIndex.values.toList()
-      ..sort((a, b) => a.lastAccessTime.compareTo(b.lastAccessTime));
+    final sorted = _cacheIndex.values.toList()..sort((a, b) => a.lastAccessTime.compareTo(b.lastAccessTime));
     // Check file existence in parallel
     final futures = <Future>[];
     for (final item in sorted) {
