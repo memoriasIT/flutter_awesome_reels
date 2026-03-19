@@ -90,19 +90,16 @@ class _DemoReelsScreenState extends State<DemoReelsScreen> {
                         debugPrint('Reel changed to index: $index');
                       },
                       onReelLiked: (reel) {
-                        _showSnackBar(
-                            '${reel.isLiked ? 'Liked' : 'Unliked'} ${reel.user?.displayName}\'s reel');
+                        _showSnackBar('${reel.isLiked ? 'Liked' : 'Unliked'} ${reel.user?.displayName}\'s reel');
                       },
                       onReelShared: (reel) {
-                        _showSnackBar(
-                            'Shared ${reel.user?.displayName}\'s reel');
+                        _showSnackBar('Shared ${reel.user?.displayName}\'s reel');
                       },
                       onReelCommented: (reel) {
                         // Show comment dialog or navigate to comments page
                       },
                       onUserFollowed: (user) {
-                        _showSnackBar(
-                            '${user.isFollowing ? 'Following' : 'Unfollowed'} ${user.displayName}');
+                        _showSnackBar('${user.isFollowing ? 'Following' : 'Unfollowed'} ${user.displayName}');
                       },
                       onUserBlocked: (user) {
                         _showSnackBar('Blocked ${user.displayName}');
@@ -147,9 +144,8 @@ class SampleData {
   static final List<ReelModel> basicReels = [
     ReelModel(
       id: '4',
-      videoSource: VideoSource(
-          url:
-              'https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd'),
+      videoSource:
+          VideoSource(url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
       user: const ReelUser(
         id: 'u2',
         username: 'bob',
@@ -168,9 +164,8 @@ class SampleData {
     ),
     ReelModel(
       id: '1',
-      videoSource: VideoSource(
-          url:
-              'https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4'),
+      videoSource:
+          VideoSource(url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
       user: const ReelUser(
         id: 'u3',
         username: 'charlie',
@@ -189,8 +184,7 @@ class SampleData {
     ReelModel(
       id: '3',
       videoSource: VideoSource(
-          url:
-              'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8'),
+          url: 'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8'),
       user: const ReelUser(
         id: 'u1',
         username: 'alice',
