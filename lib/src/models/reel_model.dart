@@ -71,21 +71,17 @@ class VideoSource {
 
   /// Check if format is available
   bool hasFormat(VideoFormat format) {
-    return this.format == format ||
-        alternativeSources?.containsKey(format) == true;
+    return this.format == format || alternativeSources?.containsKey(format) == true;
   }
 
   Map<String, dynamic> toJson() {
     return {
       'url': url,
       'format': format.name,
-      'alternativeSources':
-          alternativeSources?.map((k, v) => MapEntry(k.name, v)),
+      'alternativeSources': alternativeSources?.map((k, v) => MapEntry(k.name, v)),
       'quality': quality,
       'bitrate': bitrate,
-      'dimensions': dimensions != null
-          ? {'width': dimensions!.width, 'height': dimensions!.height}
-          : null,
+      'dimensions': dimensions != null ? {'width': dimensions!.width, 'height': dimensions!.height} : null,
     };
   }
 
@@ -98,9 +94,7 @@ class VideoSource {
       ),
       quality: json['quality'],
       bitrate: json['bitrate'],
-      dimensions: json['dimensions'] != null
-          ? Size(json['dimensions']['width'], json['dimensions']['height'])
-          : null,
+      dimensions: json['dimensions'] != null ? Size(json['dimensions']['width'], json['dimensions']['height']) : null,
     );
   }
 
@@ -193,8 +187,7 @@ class ReelModel {
 
   const ReelModel({
     required this.id,
-    @Deprecated('Use videoSource instead for better streaming support')
-    this.videoUrl,
+    @Deprecated('Use videoSource instead for better streaming support') this.videoUrl,
     this.videoSource,
     this.thumbnailUrl,
     this.duration,
@@ -214,8 +207,7 @@ class ReelModel {
     this.shouldAutoplay = true,
     this.views = 0,
     this.location,
-  }) : assert(videoUrl != null || videoSource != null,
-            'Either videoUrl or videoSource must be provided');
+  }) : assert(videoUrl != null || videoSource != null, 'Either videoUrl or videoSource must be provided');
 
   /// Constructor for HLS streaming (recommended)
   ReelModel.hls({
@@ -315,8 +307,7 @@ class ReelModel {
 
   /// Check if streaming format is available
   bool hasStreamingFormat(VideoFormat format) {
-    return videoSource?.hasFormat(format) ??
-        (format == VideoFormat.mp4 && videoUrl != null);
+    return videoSource?.hasFormat(format) ?? (format == VideoFormat.mp4 && videoUrl != null);
   }
 
   /// Get URL for specific format
@@ -331,8 +322,7 @@ class ReelModel {
   /// Create a copy of this reel with updated values
   ReelModel copyWith({
     String? id,
-    @Deprecated('Use videoSource instead for better streaming support')
-    String? videoUrl,
+    @Deprecated('Use videoSource instead for better streaming support') String? videoUrl,
     VideoSource? videoSource,
     String? thumbnailUrl,
     Duration? duration,
@@ -446,7 +436,7 @@ class ReelModel {
 
   @override
   String toString() {
-    return 'ReelModel(id: $id, videoUrl: ${effectiveVideoUrl}, format: ${videoFormat.name}, user: ${user?.username})';
+    return 'ReelModel(id: $id, videoUrl: $effectiveVideoUrl, format: ${videoFormat.name}, user: ${user?.username})';
   }
 
   @override
